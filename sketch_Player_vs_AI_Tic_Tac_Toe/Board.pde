@@ -170,10 +170,10 @@ class Board
         drawX = windowPadding;
         break;
       case 1: 
-        drawX = windowWidth/3 + windowPadding/2;
+        drawX = windowWidth/3 + windowPadding/2 + 5;
         break;
       case 2: 
-        drawX = windowWidth - windowWidth/3 + windowPadding/2;
+        drawX = windowWidth - windowWidth/3 + windowPadding/2 + 10;
         break;
     }
     
@@ -191,10 +191,10 @@ class Board
         drawY = windowPadding;
         break;
       case 1: 
-        drawY = windowHeight/3 + windowPadding/2;
+        drawY = windowHeight/3 + windowPadding/2 + 5;
         break;
       case 2: 
-        drawY = windowHeight - windowHeight/3 + windowPadding/2;
+        drawY = windowHeight - windowHeight/3 + windowPadding/2 + 10;
         break;
     }
     
