@@ -16,6 +16,7 @@ int currentPlayer = 1; // 1 is X, 2 is O
 int shapeWidth = windowWidth/3 - windowPadding - squarePadding;
 int shapeHeight = windowHeight/3 - windowPadding - squarePadding;
 
+boolean isGameOver; // Indicates if a player has won.
 
 /// *********
 /// Setup
@@ -29,6 +30,8 @@ void setup() // Pretty sure all Processing projects need this void setup()
   
   PFont f = createFont("Arial", 24);
   textFont(f);
+  
+  isGameOver = false;
   
   _board = new Board();
   _board.Setup();
@@ -105,33 +108,36 @@ void mouseClicked()
 // Takes a turn and draws the current player's shape on the screen.
 void TakeTurn(int currentSquareIndex)
 {
-  int currentSquareStatus = _board.getSquareStatus(currentSquareIndex); // Check to see if the square that was clicked was already occupied
-  
-  if (currentSquareStatus == 0) // If the square is empty then we can fill it in.
+  if (!isGameOver)
   {
-    _board.setSquareStatus(currentSquareIndex, currentPlayer); // Mark that this square is now filled by the current player
-        
-    boolean playerWon = _board.checkPlayerWon(); // Check to see if the player won the game
-    if (playerWon) // Winner
-    {
-      _printMessage("PLAYER " + currentPlayer + " WON", true); // Print on the screen for the player to see
-      println("PLAYER", currentPlayer, "WON"); // Print to the console window
-    }
-    else
-    {
-      _eraseMessage(); // Clear any previous text from below the board
-    }
+    int currentSquareStatus = _board.getSquareStatus(currentSquareIndex); // Check to see if the square that was clicked was already occupied
     
-    if (currentPlayer == 1) // Player 1 is playing, so draw an X
+    if (currentSquareStatus == 0) // If the square is empty then we can fill it in.
     {
-      _board.DrawX(currentSquareIndex);
-      currentPlayer = 2; // Switch from X to O next time
-      TakeComputerTurn();
-    }
-    else // Player 2 is playing, so draw an O
-    {
-      _board.DrawO(currentSquareIndex);
-      currentPlayer = 1; // switch from O to X next time
+      _board.setSquareStatus(currentSquareIndex, currentPlayer); // Mark that this square is now filled by the current player
+          
+      isGameOver = _board.checkPlayerWon(); // Check to see if the player won the game
+      if (isGameOver) // Winner
+      {
+        _printMessage("PLAYER " + currentPlayer + " WON", true); // Print on the screen for the player to see
+        println("PLAYER", currentPlayer, "WON"); // Print to the console window
+      }
+      else
+      {
+        _eraseMessage(); // Clear any previous text from below the board
+      }
+      
+      if (currentPlayer == 1) // Player 1 is playing, so draw an X
+      {
+        _board.DrawX(currentSquareIndex);
+        currentPlayer = 2; // Switch from X to O next time
+        TakeComputerTurn();
+      }
+      else // Player 2 is playing, so draw an O
+      {
+        _board.DrawO(currentSquareIndex);
+        currentPlayer = 1; // switch from O to X next time
+      }
     }
   }
 }
