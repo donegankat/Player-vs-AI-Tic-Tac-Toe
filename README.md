@@ -1,4 +1,4 @@
-# Simple-2-Player-Tic-Tac-Toe
-Very simple Tic Tac Toe game written to refresh my memory on how to use Processing
+# Player versus AI Tic-Tac-Toe
+Simple Tic-Tac-Toe game where you can play against a (very basic) AI opponent.
 
-Player 1 is X, player 2 is O. Players alternate turns until someone wins.
+Human player is X, computer player is O. Players alternate turns until someone wins.
